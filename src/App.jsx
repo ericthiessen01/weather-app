@@ -1,19 +1,20 @@
 import { useState } from 'react'
-import logo from './logo.svg'
+import { Routes, Route, Link } from "react-router-dom";
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const key = import.meta.env.VITE_API_KEY
+  console.log(key)
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      {/* <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="about" element={<About />} />
+      </Routes> */}
         <p>Hello Vite + React!</p>
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
         </p>
         <p>
           Edit <code>App.jsx</code> and save to test HMR updates.
