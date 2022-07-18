@@ -59,7 +59,7 @@ export default function Weather() {
                     <div className='flex justify-between'>
                         <p>Wind</p>
                         <p className='font-semibold'>{Math.round(currentWeatherData.wind.speed * 3.6)} km/h 
-                        <img src={windArrow} alt="arrow image" className='w-6 inline ml-2' style={{transform: `rotate(${currentWeatherData.wind.deg}deg)`}}/></p>
+                        <img src={windArrow} alt="arrow image" className='w-5 inline ml-2' style={{transform: `rotate(${currentWeatherData.wind.deg}deg)`}}/></p>
                     </div>
                     <div className='flex justify-between'>
                         <p>Humidity</p>
