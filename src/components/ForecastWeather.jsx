@@ -4,7 +4,6 @@ import useGeoLocation from '../hooks/useGeoLocation'
 export default function Weather() {
     const [forecastWeatherData, setForecastWeatherData] = useState([])
     const [loading, setLoading] = useState(true)
-    const [formattedData, setFormattedData] = useState([])
     const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY
     const loc = useGeoLocation()
 
@@ -12,7 +11,15 @@ export default function Weather() {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${loc.coords.lat}&lon=${loc.coords.lon}&appid=${weatherApiKey}&units=metric`)
             .then(res => res.json())
             .then(res => {
-                setForecastWeatherData(res.list)
+                setForecastWeatherData(res.list.reduce((pV, cV) => {
+                    const key = cV.dt_txt.substring(0, 10)
+                    if(!pV.hasOwnProperty(key)) {
+                        return { ...pV, [key]: [cV]} 
+                    } else {
+                        pV[key].push(cV)
+                        return pV
+                    }
+                }, {}))
                 setLoading(false)
             })
             .catch(err => console.log(err))
@@ -25,32 +32,20 @@ export default function Weather() {
     }, [loc.loaded])
 
     
-    const formattedDate = forecastWeatherData.map(item => {
+    const forecastHtml = Object.values(forecastWeatherData).forEach(item => item.map(hour => console.log(hour.main.temp)))
 
-    })
-
-    // const forecastHtml = forecastWeatherData.map(item => {
-    //     const day = item.dt_txt.substring(0, 10)
-    //     if(prevVal.includes(day)) {
-
-    //     }
-
-    //     if(item.dt_txt.substring(11) === '12:00:00') {
-    //         return item
-    //     } if(item.dt_txt.substring(11) === '03:00:00') {
-    //         return item
-    //     }
+    // const mappedArr = forecastHtml.map(arr => {
+    //     return(arr.map(item => item.main.temp))
     // })
-
-    !loading && console.log(forecastWeatherData[0].dt_txt.substring(0, 10))
-
+    
+    
+    !loading && console.log(forecastHtml)
 
     return (
         <div>   
-            {!loading &&
-                <p>
-                </p>
-                }
+            {/* {!loading &&
+                {forecastHtml}
+                } */}
         </div>
     )
 }

@@ -27,8 +27,12 @@ export default function Weather() {
     return (
         <div>   
             {!loading &&
-            <div className='w-6/12 mx-auto my-8 p-6 text-slate-50 bg-neutral-600 grid grid-cols-2 grid-rows-2 gap-4 rounded-lg shadow-2xl shadow-zinc-800'>
+            <div className='w-8/12 mx-auto my-8 p-6 text-slate-50 bg-neutral-600 grid grid-cols-2 grid-rows-2 gap-4 rounded-lg shadow-2xl shadow-zinc-800'>
                 <div className='col-start-1'>
+                    <img src={`http://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`} alt="current weather icon" className='inline-block w-32'/>
+                    <p className='text-sm font-light'>{currentWeatherData.weather[0].description}</p>
+                </div>
+                <div className='col-start-2'>
                     <p className='text-4xl font-semibold'>
                         {currentWeatherData.name}
                     </p>
@@ -36,17 +40,13 @@ export default function Weather() {
                         {new Date(currentWeatherData.dt *1000).toLocaleDateString()}
                     </p>
                 </div>
-                <div className='col-start-2'>
-                    <img src={`http://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`} alt="current weather icon" className='inline-block w-32'/>
-                    <p className='text-sm font-light'>{currentWeatherData.weather[0].description}</p>
-                </div>
                 <div>
-                <p className='text-8xl font-bold'>
-                    {Math.round(currentWeatherData.main.temp)}ºC
-                </p>
-                <p className='text-sm font-light'>
-                    Updated {new Date(currentWeatherData.dt *1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </p>
+                    <p className='text-8xl font-bold'>
+                        {Math.round(currentWeatherData.main.temp)}ºC
+                    </p>
+                    <p className='text-sm font-light'>
+                        Updated {new Date(currentWeatherData.dt *1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </p>
                 </div>
                 <div className='text-left'>
                     <p className='text-lg font-semibold'>
