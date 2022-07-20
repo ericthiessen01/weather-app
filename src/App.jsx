@@ -8,7 +8,7 @@ import ForecastWeather from './components/ForecastWeather'
 function App() {
 
   return (
-    <div className="App w-full h-screen bg-zinc-400 p-8">
+    <div className="App w-full h-full bg-slate-300 p-8 box-border">
       {/* <Search /> */}
       <CurrentWeather />
       <ForecastWeather />
