@@ -27,7 +27,7 @@ export default function Weather() {
     return (
         <div>   
             {!loading &&
-            <div className='w-8/12 mx-auto my-8 p-6 text-stone-50 bg-sky-800 grid grid-cols-2 grid-rows-2 gap-4 rounded-lg shadow-2xl shadow-zinc-800'>
+            <div className='w-full sm:w-11/12 md:w-10/12 lg:w-8/12 xl:w-7/12 2xl:w-6/12 mx-auto my-8 p-6 text-stone-50 bg-sky-800 grid grid-cols-2 grid-rows-2 gap-4 rounded-lg shadow-2xl shadow-zinc-800'>
                 <div className='col-start-1'>
                     <img src={`http://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`} alt="current weather icon" className='inline-block w-32'/>
                     <p className='text-sm font-light'>{currentWeatherData.weather[0].description}</p>
@@ -41,7 +41,7 @@ export default function Weather() {
                     </p>
                 </div>
                 <div>
-                    <p className='text-8xl font-bold'>
+                    <p className='text-6xl sm:text-8xl font-bold'>
                         {Math.round(currentWeatherData.main.temp)}ºC
                     </p>
                     <p className='text-sm font-light'>
