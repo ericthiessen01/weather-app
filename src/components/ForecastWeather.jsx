@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import useGeoLocation from '../hooks/useGeoLocation'
 import windArrow from '../assets/windArrow.svg'
 
-export default function Weather() {
+export default function Weather({ units }) {
     const [forecastWeatherData, setForecastWeatherData] = useState([])
     const [loading, setLoading] = useState(true)
     const weatherApiKey = import.meta.env.VITE_WEATHER_API_KEY
@@ -64,7 +64,7 @@ export default function Weather() {
         return (
             <div key={item.dt} className='w-full sm:w-11/12 2xl:w-10/12 mx-auto text-stone-50'>
                 <div className='flex flex-col justify-start xl:flex-row'>
-                    <div className='xl:w-36 px-2 py-2 mt-2 xl:my-2 bg-sky-900 border-stone-300 border flex xl:flex-col  items-center justify-between'>
+                    <div className='xl:w-36 px-2 py-4 xl:py-2 mt-2 xl:my-2 bg-sky-900 border-stone-300 border flex xl:flex-col  items-center justify-between'>
                         <h2 className=" text-xl font-semibold">{new Date(item[0].dt *1000).toLocaleDateString([], { weekday: 'long', month: 'long', day: '2-digit' })}</h2>
                         <div className='flex justify-between xl:flex-col gap-2 pl-8 xl:pl-0 grow xl:grow-0'>
                             <p>Feels Like</p>
@@ -82,7 +82,7 @@ export default function Weather() {
 
     return (
         <div>   
-            {!loading &&
+            {!loading && forecastWeatherData &&
                 forecastHtml
                 }
         </div>
