@@ -41,15 +41,18 @@ export default function Weather({ units, loc }) {
                         </div>
                         <div className='flex flex-col-reverse xl:flex-col w-24'>
                             <p className='text-sm font-light'>{threeHour.weather[0].description}</p>
-                            <p className='text-2xl font-bold xl:mb-8'>{Math.round(threeHour.main.temp)}ºC</p>
+                            {units === 'metric' ? <p className='text-2xl font-bold xl:mb-8'>{Math.round(threeHour.main.temp)}ºC</p> :
+                            <p className='text-2xl font-bold xl:mb-8'>{Math.round(threeHour.main.temp)}ºF</p>}
                         </div>
                     </div>
                     <div className='flex justify-between items-center xl:flex-col gap-2 xl:px-0 grow xl:grow-0'>
-                        <p>{Math.round(threeHour.main.feels_like)}ºC</p>
+                        {units === 'metric' ? <p>{Math.round(threeHour.main.feels_like)}ºC</p> :
+                        <p>{Math.round(threeHour.main.feels_like)}ºF</p>}
                         <p className='pl-4 xl:pl-0'>{Math.round(threeHour.pop * 100)}%</p>
                         <p>{threeHour.rain ? threeHour.rain["3h"] : 0}mm</p>
                         <div className='xl:flex xl:justify-center'>
-                            <p>{Math.round(threeHour.wind.speed * 3.6)} km/h </p>
+                            {units === 'metric' ? <p>{Math.round(threeHour.wind.speed * 3.6)} km/h </p> :
+                            <p>{Math.round(threeHour.wind.speed)} mph </p>}
                             <img src={windArrow} alt="arrow image" className='w-4 inline ml-2' style={{transform: `rotate(${threeHour.wind.deg}deg)`}}/>
                         </div>
                         <p>{Math.round(threeHour.main.humidity)}%</p>

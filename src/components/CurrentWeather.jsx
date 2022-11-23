@@ -37,9 +37,8 @@ export default function Weather({ units, loc }) {
                     </p>
                 </div>
                 <div>
-                    <p className='text-6xl sm:text-8xl font-bold'>
-                        {Math.round(currentWeatherData.main.temp)}ºC
-                    </p>
+                    {units === 'metric' ? <p className='text-6xl sm:text-8xl font-bold'>{Math.round(currentWeatherData.main.temp)}ºC</p> :
+                    <p className='text-6xl sm:text-8xl font-bold'>{Math.round(currentWeatherData.main.temp)}ºF</p>}
                     <p className='text-sm font-light'>
                         Updated {new Date(currentWeatherData.dt *1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
@@ -50,12 +49,16 @@ export default function Weather({ units, loc }) {
                     </p>
                     <div className='flex justify-between'>
                         <p>Feels like</p>
-                        <p className='font-semibold'>{Math.round(currentWeatherData.main.feels_like)}ºC</p>
+                        {units === 'metric' ? <p className='font-semibold'>{Math.round(currentWeatherData.main.feels_like)}ºC</p> :
+                        <p className='font-semibold'>{Math.round(currentWeatherData.main.feels_like)}ºF</p>}
                     </div>
                     <div className='flex justify-between'>
                         <p>Wind</p>
-                        <p className='font-semibold'>{Math.round(currentWeatherData.wind.speed * 3.6)} km/h 
-                        <img src={windArrow} alt="arrow image" className='w-5 inline ml-2' style={{transform: `rotate(${currentWeatherData.wind.deg}deg)`}}/></p>
+                        <div>
+                            {units === 'metric' ? <p className='font-semibold inline'>{Math.round(currentWeatherData.wind.speed * 3.6)} km/h</p> :
+                            <p className='font-semibold inline'>{Math.round(currentWeatherData.wind.speed)} mph</p> }
+                            <img src={windArrow} alt="arrow image" className='w-5 inline ml-2' style={{transform: `rotate(${currentWeatherData.wind.deg}deg)`}}/>
+                        </div>
                     </div>
                     <div className='flex justify-between'>
                         <p>Humidity</p>
